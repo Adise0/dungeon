@@ -1,3 +1,4 @@
+#pragma once
 
 #include "../Objects/Vector2/Vector2.h"
 

@@ -1,3 +1,4 @@
+#pragma once
 
 namespace Dungeon::Engine {
 
@@ -12,6 +13,9 @@ private:
   // #endregion
 
   // #region Methods
+protected:
+  virtual void OnDestroy();
+
 public:
   /// @brief Getter for this component's GameObject
   /// @return The component's GameObject

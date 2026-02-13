@@ -1,3 +1,4 @@
+#pragma once
 #include "../Component/Component.h"
 #include "../Transform/Transform.h"
 #include <memory>
