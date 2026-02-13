@@ -8,7 +8,8 @@ namespace Dungeon::Engine {
 class Behaviour : public Component {
   // #region Static
 public:
-  Store<Behaviour> store;
+  /// @brief The behaviour store
+  static Store<Behaviour> store;
   // #endregion
 
   // #region Methods

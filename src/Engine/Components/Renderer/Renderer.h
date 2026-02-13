@@ -9,14 +9,14 @@ namespace Dungeon::Engine {
 class Renderer : public Component {
   // #region Static
 public:
-  Store<Renderer> store;
+  /// @brief The renderer store
+  static Store<Renderer> store;
   // #endregion
 
   // #region Methods
-protected:
-  virtual void Awake();
-  virtual void Start();
-  virtual void Update();
+public:
+  /// @brief Renders this renderer contents to the screen
+  void Render();
   // #endregion
 };
 } // namespace Dungeon::Engine
