@@ -38,6 +38,19 @@ std::unique_ptr<Transform> Transform::RemoveChild(Transform *child) {
   // #endregion
 }
 
+short Transform::GetChildIndex(Transform *child) {
+  // #region GetChildIndex
+  if (!child) throw std::runtime_error("Unknown child");
+
+  auto it = std::find_if(
+      children.begin(), children.end(),
+      [&](const std::unique_ptr<Transform> &sibling) { return sibling.get() == child; });
+
+  if (it == children.end()) throw std::runtime_error("Unknown child");
+  return (short)(std::distance(children.begin(), it));
+  // #endregion
+}
+
 
 short Transform::GetSiblingIndex() {
   // #region GetSiblingIndex
@@ -51,7 +64,7 @@ short Transform::GetSiblingIndex() {
 void Transform::SetChildIndex(Transform *child, short newIndex) {
   // #region SetChildIndex
   if (!child) return;
-  if (newIndex < 0 || newIndex >= children.size()) {
+  if (newIndex < 0 || newIndex >= (short)children.size()) {
     throw std::runtime_error("Cannot set child to index " + std::to_string(newIndex) +
                              ". Index out of range.");
   }

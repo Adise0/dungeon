@@ -1,5 +1,6 @@
 #pragma once
 #include "../SerializedComponent/SerializedComponent.h"
+#include "../SerializedTransform/SerializedTransform.h"
 #include <string>
 #include <vector>
 

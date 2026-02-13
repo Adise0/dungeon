@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 namespace Dungeon::Engine {
 
 template <typename StoreType> class Store {

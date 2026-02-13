@@ -22,7 +22,7 @@ protected:
 public:
   /// @brief Getter for this component's GameObject
   /// @return The component's GameObject
-  GameObject *GameObject() { return gameObject; };
+  GameObject *GetGameObject() { return gameObject; };
   // #endregion
 };
 } // namespace Dungeon::Engine
