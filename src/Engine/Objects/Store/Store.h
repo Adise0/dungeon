@@ -14,7 +14,7 @@ public:
   static int RegisterItem(StoreType *item);
   /// @brief Unregisters the item from the store
   /// @param item The item to unregister
-  static void UnregisterBehaviour(StoreType *item);
+  static void UnregisterItem(StoreType *item);
 
 public:
   /// @brief Getter for the item store
