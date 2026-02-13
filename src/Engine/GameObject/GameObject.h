@@ -2,13 +2,15 @@
 #include "../Component/Component.h"
 #include "../Transform/Transform.h"
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace Dungeon::Engine {
 class GameObject {
   // #region Data
 public:
-  Transform transform;
+  std::string name;
+  Transform *transform;
   std::vector<std::unique_ptr<Component>> components;
 
 private:
