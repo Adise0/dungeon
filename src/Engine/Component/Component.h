@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 namespace Dungeon::Engine {
 
 class GameObject;
@@ -7,6 +8,8 @@ class GameObject;
 class Component {
   // #region Data
 public:
+  std::string name;
+
 private:
   /// @brief This component's GameObject
   GameObject *gameObject;
