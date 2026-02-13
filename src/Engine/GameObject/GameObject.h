@@ -1,5 +1,6 @@
 #pragma once
 #include "../Component/Component.h"
+#include "../Objects/Store/Store.h"
 #include "../Transform/Transform.h"
 #include <memory>
 #include <string>
@@ -7,6 +8,12 @@
 
 namespace Dungeon::Engine {
 class GameObject {
+  // #region Static
+public:
+  /// @brief The GameObject store
+  static Store<GameObject> store;
+  // #endregion
+
   // #region Data
 public:
   std::string name;
