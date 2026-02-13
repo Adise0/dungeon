@@ -47,9 +47,11 @@ void Camera::Render() {
     Vector2 normalizedPosition =
         Vector2(relativePosition.x / (width / 2), relativePosition.y / (height / 2));
 
+    // TODO: Swap to AABB culling
     if (normalizedPosition.x < -1 || normalizedPosition.x > 1 || normalizedPosition.y < -1 ||
         normalizedPosition.y > 1)
       continue;
+
 
     Vector2 screenPosition =
         Vector2(((normalizedPosition.x * 0.5) + 0.5) * (float)WindowManager::resolutionX,

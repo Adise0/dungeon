@@ -34,7 +34,7 @@ int Run() {
     std::unique_ptr<PlayerController> pc = std::make_unique<PlayerController>();
 
     test->AddComponent(std::move(renderer));
-    test->AddComponent(std::move(pc));
+    cameraGO->AddComponent(std::move(pc));
 
     GameManager::Run();
 
