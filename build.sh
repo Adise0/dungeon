@@ -8,10 +8,10 @@ printf "Starting watcher...\n"
 
 watchexec -w src -e cpp,h -r --stop-signal SIGTERM -- bash -lc '
   clear
+  cp -r ./assets ./out/assets
   set -e
   tmp="./out/app.$$.new"
-  files=$(find src -type f -name "*.cpp" -print)
-  g++ $files -std=c++20 -Wall -O2 -o "$tmp"
+  g++ $(find src -type f -name "*.cpp") -std=c++20 -Wall -O2 -o "$tmp" $(pkg-config --cflags --libs sdl3 sdl3-image)
   mv -f "$tmp" ./out/app
   exec ./out/app
 '
