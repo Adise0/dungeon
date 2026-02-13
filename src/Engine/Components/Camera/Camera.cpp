@@ -1,6 +1,7 @@
 #include "./Camera.h"
 #include "../../../WindowManager/WindowManager.h"
 #include "../Renderer/Renderer.h"
+#include <SDL3/SDL.h>
 #include <algorithm>
 
 namespace Dungeon::Engine {
@@ -47,7 +48,12 @@ void Camera::Render() {
         Vector2(((normalizedPosition.x * 0.5) + 0.5) * WindowManager::resolutionX,
                 ((-normalizedPosition.y * 0.5) + 0.5) * WindowManager::resolutionY);
 
-    renderer->Render(screenPosition);
+    float pixelsPerUnit = WindowManager::resolutionX / width;
+    Vector2 rendererSize =
+        Vector2(renderer->size.x * pixelsPerUnit, renderer->size.y * pixelsPerUnit);
+
+    SDL_FRect rect = {screenPosition.x, screenPosition.y, rendererSize.x, rendererSize.y};
+    renderer->Render(rect);
   }
 }
 

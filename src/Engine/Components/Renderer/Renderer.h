@@ -4,6 +4,7 @@
 #include "../../GameObject/GameObject.h"
 #include "../../Objects/Store/Store.h"
 #include "../../Objects/Vector2/Vector2.h"
+#include <SDL3/SDL.h>
 #include <vector>
 namespace Dungeon::Engine {
 
@@ -24,7 +25,7 @@ public:
   // #region Methods
 public:
   /// @brief Renders this renderer contents to the screen
-  void Render(Vector2 screenPos);
+  void Render(SDL_FRect rect);
   // #endregion
 };
 } // namespace Dungeon::Engine
