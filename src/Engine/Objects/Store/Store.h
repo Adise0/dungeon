@@ -32,6 +32,6 @@ public:
 public:
   /// @brief Getter for the item store
   /// @return The item store
-  static std::vector<StoreType *> GetItems() { return store; };
+  static std::vector<StoreType *> &GetItems() { return store; }
 };
 } // namespace Dungeon::Engine

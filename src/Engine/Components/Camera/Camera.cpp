@@ -19,9 +19,9 @@ Camera::Camera() {
 void Camera::SetAsActiveCamera() {
   // #region SetAsActiveCamera
   isActive = true;
-  auto it = std::find_if(store.GetItems().begin(), store.GetItems().end(),
-                         [](Camera *cam) { return cam->isActive; });
-  if (it != store.GetItems().end()) (*it)->isActive = false;
+  auto &cameras = store.GetItems();
+  auto it = std::find_if(cameras.begin(), cameras.end(), [](Camera *cam) { return cam->isActive; });
+  if (it != cameras.end()) (*it)->isActive = false;
 
   activeCamera = this;
   // #endregion
@@ -31,7 +31,7 @@ void Camera::Render() {
   SDL_SetRenderDrawColor(WindowManager::renderer, background.r, background.g, background.b,
                          background.a);
 
-  std::vector<Renderer *> renderers = Renderer::store.GetItems();
+  auto &renderers = Renderer::store.GetItems();
   renderers.erase(std::remove_if(renderers.begin(), renderers.end(),
                                  [](Renderer *ren) { return !ren->GetGameObject()->IsEnabled(); }),
                   renderers.end());
