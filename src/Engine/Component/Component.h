@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Transform/Transform.h"
 #include <string>
 namespace Dungeon::Engine {
 
@@ -10,19 +11,20 @@ class Component {
 public:
   std::string name;
 
-private:
+public:
   /// @brief This component's GameObject
   GameObject *gameObject;
+  Transform *transform;
+  // #endregion
+
+  // #region Constructor
+public:
   // #endregion
 
   // #region Methods
 protected:
   virtual void OnDestroy();
 
-public:
-  /// @brief Getter for this component's GameObject
-  /// @return The component's GameObject
-  GameObject *GetGameObject() { return gameObject; };
   // #endregion
 };
 } // namespace Dungeon::Engine

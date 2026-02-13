@@ -19,8 +19,13 @@ public:
 public:
   float zIndex = 0;
   Vector2 size;
+  SDL_Texture *sprite;
   // #endregion
 
+  // #region Constructor
+public:
+  Renderer();
+  // #endregion
 
   // #region Methods
 public:

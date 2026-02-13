@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Component/Component.h"
+#include "../../GameObject/GameObject.h"
 #include "../../Objects/Store/Store.h"
 #include <vector>
 namespace Dungeon::Engine {
@@ -18,10 +19,10 @@ public:
   // #endregion
 
   // #region Methods
-protected:
-  virtual void Awake();
-  virtual void Start();
-  virtual void Update();
+public:
+  virtual void Awake() {};
+  virtual void Start() {};
+  virtual void Update(float deltaTime) {};
   // #endregion
 };
 } // namespace Dungeon::Engine

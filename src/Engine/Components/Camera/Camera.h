@@ -30,6 +30,7 @@ public:
 public:
   void SetAsActiveCamera();
   void Render();
+  void SetSize(float newSize);
 
 private:
   void ComputeRect();

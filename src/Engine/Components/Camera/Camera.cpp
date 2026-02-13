@@ -3,6 +3,7 @@
 #include "../Renderer/Renderer.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
+#include <iostream>
 
 namespace Dungeon::Engine {
 using namespace Rendering;
@@ -30,17 +31,19 @@ void Camera::SetAsActiveCamera() {
 void Camera::Render() {
   SDL_SetRenderDrawColor(WindowManager::renderer, background.r, background.g, background.b,
                          background.a);
+  SDL_RenderClear(WindowManager::renderer);
 
-  auto &renderers = Renderer::store.GetItems();
+  std::vector<Renderer *> renderers = Renderer::store.GetItems();
   renderers.erase(std::remove_if(renderers.begin(), renderers.end(),
-                                 [](Renderer *ren) { return !ren->GetGameObject()->IsEnabled(); }),
+                                 [](Renderer *ren) { return !ren->gameObject->IsEnabled(); }),
                   renderers.end());
 
   // TODO: sort by zIndex
 
   for (Renderer *renderer : renderers) {
     Vector2 relativePosition =
-        renderer->GetGameObject()->transform->position - GetGameObject()->transform->position;
+        renderer->gameObject->transform->position - gameObject->transform->position;
+
     Vector2 normalizedPosition =
         Vector2(relativePosition.x / (width / 2), relativePosition.y / (height / 2));
 
@@ -49,22 +52,30 @@ void Camera::Render() {
       continue;
 
     Vector2 screenPosition =
-        Vector2(((normalizedPosition.x * 0.5) + 0.5) * WindowManager::resolutionX,
-                ((-normalizedPosition.y * 0.5) + 0.5) * WindowManager::resolutionY);
+        Vector2(((normalizedPosition.x * 0.5) + 0.5) * (float)WindowManager::resolutionX,
+                ((-normalizedPosition.y * 0.5) + 0.5) * (float)WindowManager::resolutionY);
 
-    float pixelsPerUnit = WindowManager::resolutionX / width;
+
+    float pixelsPerUnit = (float)WindowManager::resolutionX / width;
     Vector2 rendererSize =
         Vector2(renderer->size.x * pixelsPerUnit, renderer->size.y * pixelsPerUnit);
 
-    SDL_FRect rect = {screenPosition.x, screenPosition.y, rendererSize.x, rendererSize.y};
+
+    SDL_FRect rect = {screenPosition.x - (rendererSize.x * 0.5f),
+                      screenPosition.y - (rendererSize.y * 0.5f), rendererSize.x, rendererSize.y};
     renderer->Render(rect);
   }
+}
+
+void Camera::SetSize(float newSize) {
+  size = newSize;
+  ComputeRect();
 }
 
 void Camera::ComputeRect() {
   // #region ComputeRect
   width = size;
-  height = width * (WindowManager::resolutionY / WindowManager::resolutionX);
+  height = width * ((float)WindowManager::resolutionY / (float)WindowManager::resolutionX);
   // #endregion
 }
 } // namespace Dungeon::Engine

@@ -24,7 +24,7 @@ public:
 
 private:
   /// @brief Whether this GameObject is Enabled
-  bool isEnabled;
+  bool isEnabled = true;
   // #endregion
 
 public:

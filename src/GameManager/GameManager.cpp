@@ -1,7 +1,9 @@
 #include "GameManager.h"
+#include "../Engine/Components/Behaviour/Behaviour.h"
 #include "../Engine/Components/Camera/Camera.h"
 #include "../WindowManager/WindowManager.h"
 #include <SDL3/SDL.h>
+#include <algorithm>
 #include <chrono>
 #include <iostream>
 
@@ -33,6 +35,14 @@ void GameManager::Update(float deltaTime) {
   // #region Update
   try {
 
+    std::vector<Behaviour *> behaviours = Behaviour::store.GetItems();
+    for (Behaviour *behaviour : behaviours) {
+      behaviours.erase(std::remove_if(behaviours.begin(), behaviours.end(),
+                                      [](Behaviour *beh) { return !beh->gameObject->IsEnabled(); }),
+                       behaviours.end());
+
+      behaviour->Update(deltaTime);
+    }
 
 
   } catch (...) {
@@ -43,7 +53,7 @@ void GameManager::Update(float deltaTime) {
 
 void GameManager::Render() {
   // #region Render
-  SDL_RenderClear(WindowManager::renderer);
+
   try {
     Camera *activeCam = Camera::activeCamera;
     activeCam->Render();
