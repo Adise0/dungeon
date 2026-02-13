@@ -41,6 +41,7 @@ void GameManager::Update(float deltaTime) {
 
 void GameManager::Render() {
   // #region Render
+  SDL_SetRenderDrawColor(WindowManager::renderer, 255, 255, 255, 255);
   SDL_RenderClear(WindowManager::renderer);
   try {
 

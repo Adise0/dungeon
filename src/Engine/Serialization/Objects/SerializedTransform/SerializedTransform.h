@@ -8,12 +8,19 @@ class SerializedTransform {
   // #region Data
 public:
   int id;
-  std::string serializedPosition;
+  std::string position;
   float rotation;
-  std::string serializedScale;
-
+  std::string scale;
   int gameObject;
+  int refid = -1;
+  // #endregion
 
+  // #region Methods
+public:
+  json ToJson() {
+    return json{{"id", id},       {"position", position},     {"rotation", rotation},
+                {"scale", scale}, {"gameObject", gameObject}, {"refid", refid}};
+  }
   // #endregion
 };
 } // namespace Dungeon::Engine::Serialization

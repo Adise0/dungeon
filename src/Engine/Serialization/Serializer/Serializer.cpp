@@ -1,9 +1,10 @@
 #include "Serializer.h"
-
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include <stack>
 namespace Dungeon::Engine::Serialization {
 
-
+using json = nlohmann::json;
 std::string Serializer::GetGOSerializedIdString(GameObject *gameObject) {
   // #region GetGOSerializedIdString
   std::string stringId = "";
@@ -53,6 +54,12 @@ int Serializer::GetCSerializedId(GameObject *gameObject, Component *component) {
   // #endregion
 }
 
+void Serializer::SerializeToFile(GameObject *gameObject) {
+  // #region SerializeToFile
+  json GOJson;
+  // #endregion
+}
+
 
 SerializedGO Serializer::Serialize(GameObject *gameObject) {
   // #region Serialize
@@ -80,9 +87,9 @@ SerializedTransform Serializer::SerializeTransform(GameObject *gameObject) {
   SerializedTransform serializedTransform;
   serializedTransform.id = GetTSerializedId(gameObject);
   serializedTransform.gameObject = GetGOSerializedId(gameObject);
-  serializedTransform.serializedPosition = gameObject->transform->position.ToString();
+  serializedTransform.position = gameObject->transform->position.ToString();
   serializedTransform.rotation = gameObject->transform->rotation;
-  serializedTransform.serializedScale = gameObject->transform->scale.ToString();
+  serializedTransform.scale = gameObject->transform->scale.ToString();
 
   return serializedTransform;
   // #endregion

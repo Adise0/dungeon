@@ -7,12 +7,21 @@
 
 namespace Dungeon::Engine::Serialization {
 class Serializer {
+  // #region Data
+public:
+  static constexpr char *assetPath = "out/assets";
 
+private:
+  static std::vector<int> serializedGameObjects;
+  static std::vector<int> SerializedTransforms;
+  static std::vector<int> serializedComponents;
+  // #endregion
 
 
   // #region Methods
 public:
   static SerializedGO Serialize(GameObject *gameObject);
+  static void SerializeToFile(GameObject *gameObject);
 
 private:
   static std::string GetGOSerializedIdString(GameObject *gameObject);
