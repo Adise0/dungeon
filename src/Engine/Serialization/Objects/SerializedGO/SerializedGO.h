@@ -1,4 +1,5 @@
 #pragma once
+#include "../SerializedComponent/SerializedComponent.h"
 #include <string>
 #include <vector>
 
@@ -8,8 +9,9 @@ class SerializedGO {
 public:
   int id;
   std::string name;
-  int transform;
-  std::vector<int> components;
+  SerializedTransform transform;
+  std::vector<SerializedComponent> components;
+  std::vector<SerializedGO> children;
   // #endregion
 };
 } // namespace Dungeon::Engine::Serialization

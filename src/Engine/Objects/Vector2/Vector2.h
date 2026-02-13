@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-
+#include <string>
 
 namespace Dungeon::Engine {
 
@@ -11,6 +11,12 @@ struct Vector2 {
 
   Vector2() : x(0), y(0) {}
   Vector2(float x, float y) : x(x), y(y) {}
+  std::string ToString() {
+    std::string stringified = "(";
+    stringified += std::to_string(x) + ", ";
+    stringified += std::to_string(y) + ")";
+    return stringified;
+  }
 
   Vector2(const Vector2Int &v); // declared only
   Vector2Int ToInt() const;     // declared only

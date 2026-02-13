@@ -1,19 +1,17 @@
-
 #pragma once
 #include <string>
-#include <vector>
 
 namespace Dungeon::Engine::Serialization {
-class SerializedTransform {
+
+class SerializedComponent {
   // #region Data
 public:
   int id;
-  std::string serializedPosition;
-  float rotation;
-  std::string serializedScale;
+  std::string name;
 
   int gameObject;
 
+  //TODO: Component serialization
   // #endregion
 };
 } // namespace Dungeon::Engine::Serialization

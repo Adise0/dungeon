@@ -23,6 +23,8 @@ private:
   GameObject *gameObject;
   /// @brief The teransform's parent
   Transform *parent;
+
+public:
   std::vector<std::unique_ptr<Transform>> children;
   // #endregion
 
