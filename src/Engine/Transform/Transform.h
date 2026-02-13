@@ -1,7 +1,9 @@
-#include "../GameObject/GameObject.h"
+
 #include "../Objects/Vector2/Vector2.h"
 
 namespace Dungeon::Engine {
+
+class GameObject;
 
 class Transform {
   // #region Data
@@ -16,7 +18,7 @@ public:
 
 private:
   /// @brief This transform's GameObject
-  GameObject gameObject;
+  GameObject *gameObject;
 
   // #endregion
 
@@ -24,7 +26,7 @@ private:
 public:
   /// @brief Getter for this transform's GameObject
   /// @return The transform's GameObject
-  GameObject GameObject() { return gameObject; };
+  GameObject *GameObject() { return gameObject; };
   // #endregion
 };
 } // namespace Dungeon::Engine
