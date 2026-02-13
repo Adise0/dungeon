@@ -1,8 +1,9 @@
 #pragma once
+#include <nlohmann/json.hpp>
 #include <string>
 
 namespace Dungeon::Engine::Serialization {
-
+using json = nlohmann::json;
 class SerializedComponent {
   // #region Data
 public:

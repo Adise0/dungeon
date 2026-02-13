@@ -19,6 +19,8 @@ public:
   std::string name;
   Transform *transform;
   std::vector<std::unique_ptr<Component>> components;
+  GameObject(std::string name);
+  ~GameObject();
 
 private:
   /// @brief Whether this GameObject is Enabled

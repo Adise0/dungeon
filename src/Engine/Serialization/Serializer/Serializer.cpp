@@ -1,10 +1,13 @@
 #include "Serializer.h"
+#include <filesystem>
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include <stack>
+
 namespace Dungeon::Engine::Serialization {
 
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 std::string Serializer::GetGOSerializedIdString(GameObject *gameObject) {
   // #region GetGOSerializedIdString
   std::string stringId = "";
@@ -56,7 +59,11 @@ int Serializer::GetCSerializedId(GameObject *gameObject, Component *component) {
 
 void Serializer::SerializeToFile(GameObject *gameObject) {
   // #region SerializeToFile
-  json GOJson;
+  json GOJson = Serialize(gameObject).ToJson();
+
+  if (!fs::exists(assetPath)) fs::create_directories(assetPath);
+
+  std::ofstream(std::string() + assetPath + "/" + gameObject->name + ".do") << GOJson.dump(2);
   // #endregion
 }
 

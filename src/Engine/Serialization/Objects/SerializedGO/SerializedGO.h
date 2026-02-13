@@ -37,7 +37,8 @@ public:
                 {"name", name},
                 {"transform", transform.ToJson()},
                 {"components", componentJsons},
-                {"refId", cheldrenJson}};
+                {"children", cheldrenJson},
+                {"refId", refId}};
   }
   // #endregion
 };

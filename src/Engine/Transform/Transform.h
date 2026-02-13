@@ -13,7 +13,7 @@ public:
   /// @brief The poistion of this transform
   Vector2 position;
   /// @brief The rotation of this transform| IN DEGREES
-  float rotation;
+  float rotation = 0;
   /// @brief The scale of this transform
   Vector2 scale;
 
