@@ -8,4 +8,10 @@ GameObject::GameObject(std::string name) : name(name) {
 }
 GameObject::~GameObject() {}
 
+void GameObject::AddComponent(std::unique_ptr<Component> component) {
+  // #region Component
+  components.push_back(std::move(component));
+  // #endregion
+}
+
 } // namespace Dungeon::Engine

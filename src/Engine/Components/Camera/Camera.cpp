@@ -6,6 +6,7 @@
 
 namespace Dungeon::Engine {
 using namespace Rendering;
+
 Camera::Camera() {
   // #region Camera
   int index = store.RegisterItem(this);
@@ -27,6 +28,9 @@ void Camera::SetAsActiveCamera() {
 }
 
 void Camera::Render() {
+  SDL_SetRenderDrawColor(WindowManager::renderer, background.r, background.g, background.b,
+                         background.a);
+
   std::vector<Renderer *> renderers = Renderer::store.GetItems();
   renderers.erase(std::remove_if(renderers.begin(), renderers.end(),
                                  [](Renderer *ren) { return !ren->GetGameObject()->IsEnabled(); }),

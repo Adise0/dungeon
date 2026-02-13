@@ -63,7 +63,7 @@ void Serializer::SerializeToFile(GameObject *gameObject) {
 
   if (!fs::exists(assetPath)) fs::create_directories(assetPath);
 
-  std::ofstream(std::string() + assetPath + "/" + gameObject->name + ".do") << GOJson.dump(2);
+  std::ofstream(std::string(assetPath) + "/" + gameObject->name + ".do") << GOJson.dump(2);
   // #endregion
 }
 

@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "../Engine/Components/Camera/Camera.h"
 #include "../WindowManager/WindowManager.h"
 #include <SDL3/SDL.h>
 #include <chrono>
@@ -7,6 +8,7 @@
 namespace Dungeon {
 
 using namespace Rendering;
+using namespace Engine;
 
 bool GameManager::isRunning = false;
 
@@ -41,10 +43,10 @@ void GameManager::Update(float deltaTime) {
 
 void GameManager::Render() {
   // #region Render
-  SDL_SetRenderDrawColor(WindowManager::renderer, 255, 255, 255, 255);
   SDL_RenderClear(WindowManager::renderer);
   try {
-
+    Camera *activeCam = Camera::activeCamera;
+    activeCam->Render();
 
     SDL_RenderPresent(WindowManager::renderer);
   } catch (...) {

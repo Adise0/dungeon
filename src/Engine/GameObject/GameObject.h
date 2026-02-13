@@ -31,5 +31,7 @@ public:
   /// @brief Getter for whether this GameObject is enabled
   /// @return Whether it's enabled
   bool IsEnabled() { return isEnabled; };
+
+  void AddComponent(std::unique_ptr<Component> component);
 };
 } // namespace Dungeon::Engine

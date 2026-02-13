@@ -3,13 +3,14 @@
 #include "../Objects/SerializedGO/SerializedGO.h"
 #include "../Objects/SerializedTransform/SerializedTransform.h"
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace Dungeon::Engine::Serialization {
 class Serializer {
   // #region Data
 public:
-  static constexpr char *assetPath = "out/assets";
+  static constexpr std::string_view assetPath = "out/assets";
 
 private:
   static std::vector<int> serializedGameObjects;
