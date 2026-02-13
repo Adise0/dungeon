@@ -8,12 +8,12 @@ private:
   /// @brief The store
   static std::vector<StoreType *> store;
 
-private:
+public:
   /// @brief Registers the item to the store
-  /// @param behaviour The item to register
-  static void RegisterItem(StoreType *item);
+  /// @param item The item to register
+  static int RegisterItem(StoreType *item);
   /// @brief Unregisters the item from the store
-  /// @param behaviour The item to unregister
+  /// @param item The item to unregister
   static void UnregisterBehaviour(StoreType *item);
 
 public:

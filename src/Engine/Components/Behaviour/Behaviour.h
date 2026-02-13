@@ -12,6 +12,11 @@ public:
   static Store<Behaviour> store;
   // #endregion
 
+  // #region Constructor
+public:
+  Behaviour();
+  // #endregion
+
   // #region Methods
 protected:
   virtual void Awake();
