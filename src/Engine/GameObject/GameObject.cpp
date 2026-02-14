@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include <algorithm>
+#include <iostream>
 namespace Dungeon::Engine {
 
 
@@ -19,11 +20,14 @@ GameObject::GameObject(Scene *scene, Transform *parent, std::string name) : name
 
 GameObject::~GameObject() {}
 
-void GameObject::AddComponent(std::unique_ptr<Component> component) {
+Component *GameObject::AddComponent(std::unique_ptr<Component> component) {
   // #region Component
   component->gameObject = this;
+  std::cout << "Adding component: " << component.get()->name << " To: " << name << std::endl;
   component->transform = transform;
+  Component *raw = component.get();
   components.push_back(std::move(component));
+  return raw;
   // #endregion
 }
 

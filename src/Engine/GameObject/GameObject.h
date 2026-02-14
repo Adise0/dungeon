@@ -36,7 +36,7 @@ public:
   /// @return Whether it's enabled
   bool IsEnabled() { return isEnabled; };
 
-  void AddComponent(std::unique_ptr<Component> component);
+  Component *AddComponent(std::unique_ptr<Component> component);
   GameObject *CreateChild(std::string name);
 
   Component *GetComponentByName(std::string name);

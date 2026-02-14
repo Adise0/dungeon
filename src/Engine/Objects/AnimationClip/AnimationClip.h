@@ -7,16 +7,18 @@ public:
   SDL_Texture *spriteSheet;
   float cellSize;
   short frame;
-  int msPerFrame;
+  int frameRate;
   bool isPlaying;
-  float currentTimer;
+  float currentTimer = 0;
   float speed = 1;
   bool loop = true;
 
 
 public:
   AnimationClip(float cellSize, SDL_Texture *spriteSheet)
-      : cellSize(cellSize), spriteSheet(spriteSheet) {};
+      : spriteSheet(spriteSheet), cellSize(cellSize) {};
+
+  AnimationClip() : spriteSheet(nullptr), cellSize(0.0f) {}
 
 public:
   short Length();
@@ -26,6 +28,6 @@ public:
   void Pause();
   void Stop();
   void Reset();
-  void Run(float deltaTime);
+  void Render(float deltaTime, SDL_FRect rect);
 };
 } // namespace Dungeon::Engine

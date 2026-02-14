@@ -22,7 +22,7 @@ private:
   /// @brief This transform's GameObject
   GameObject *gameObject;
   /// @brief The teransform's parent
-  Transform *parent;
+  Transform *parent = nullptr;
 
 public:
   std::vector<std::unique_ptr<Transform>> children;

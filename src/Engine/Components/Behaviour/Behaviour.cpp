@@ -5,6 +5,9 @@ namespace Dungeon::Engine {
 
 
 
-Behaviour::Behaviour() { store.RegisterItem(this); }
+Behaviour::Behaviour() {
+  store.RegisterItem(this);
+  name = "Behaviour";
+}
 
 } // namespace Dungeon::Engine

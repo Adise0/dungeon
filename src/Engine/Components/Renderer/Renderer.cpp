@@ -7,14 +7,17 @@ namespace Dungeon::Engine {
 
 using namespace Rendering;
 
-Renderer::Renderer() { store.RegisterItem(this); }
+Renderer::Renderer() {
+  store.RegisterItem(this);
+  name = "Renderer";
+}
 
 void Renderer::Render(float deltaTime, SDL_FRect rect) {
 
   // #region Render
   if (useAnimator) {
     Animator *animator = (Animator *)(gameObject->GetComponentByName("Animator"));
-    animator->Run(deltaTime);
+    animator->Render(deltaTime, rect);
   } else {
     if (useSprite) SDL_RenderTexture(WindowManager::renderer, sprite, NULL, &rect);
     else {

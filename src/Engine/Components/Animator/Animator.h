@@ -23,7 +23,7 @@ public:
   void Pause();
   void Stop();
   void Reset();
-  void Run(float deltaTime);
+  void Render(float deltaTime, SDL_FRect rect);
 
   void AddAnimation(std::string clipName, AnimationClip clip);
 };
