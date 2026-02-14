@@ -23,6 +23,7 @@ public:
   Scene *scene;
 
   GameObject(Scene *scene, std::string name);
+  GameObject(Scene *scene, Transform *parent, std::string name);
   ~GameObject();
 
 private:
@@ -36,6 +37,7 @@ public:
   bool IsEnabled() { return isEnabled; };
 
   void AddComponent(std::unique_ptr<Component> component);
+  GameObject *CreateChild(std::string name);
 
   Component *GetComponentByName(std::string name);
 };
