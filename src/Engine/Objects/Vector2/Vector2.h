@@ -22,7 +22,17 @@ struct Vector2 {
   Vector2Int ToInt() const;     // declared only
 
   Vector2 operator+(const Vector2 &other) const { return {x + other.x, y + other.y}; }
+  Vector2 &operator+=(const Vector2 &other) {
+    x += other.x;
+    y += other.y;
+    return *this;
+  }
   Vector2 operator-(const Vector2 &other) const { return {x - other.x, y - other.y}; }
+  Vector2 &operator-=(const Vector2 &other) {
+    x -= other.x;
+    y -= other.y;
+    return *this;
+  }
   Vector2 operator*(const Vector2 &other) const { return {x * other.x, y * other.y}; }
   Vector2 operator*(float scalar) const { return {x * scalar, y * scalar}; }
   Vector2 operator/(float scalar) const { return {x / scalar, y / scalar}; }
@@ -32,6 +42,13 @@ struct Vector2 {
     float y = std::pow(b.y - a.y, 2);
     return std::sqrt(x + y);
   }
+
+  Vector2 Normalized() const {
+    float magnitude = Magnitude();
+    if (magnitude == 0) return Vector2(0, 0);
+    return Vector2(x / magnitude, y / magnitude);
+  }
+  float Magnitude() const { return std::sqrt(x * x + y * y); }
 };
 
 struct Vector2Int {
@@ -45,7 +62,17 @@ struct Vector2Int {
   Vector2 ToFloat() const;      // declared only
 
   Vector2Int operator+(const Vector2Int &other) const { return {x + other.x, y + other.y}; }
+  Vector2Int &operator+=(const Vector2Int &other) {
+    x += other.x;
+    y += other.y;
+    return *this;
+  }
   Vector2Int operator-(const Vector2Int &other) const { return {x - other.x, y - other.y}; }
+  Vector2Int &operator-=(const Vector2Int &other) {
+    x -= other.x;
+    y -= other.y;
+    return *this;
+  }
   Vector2Int operator*(const Vector2Int &other) const { return {x * other.x, y * other.y}; }
   Vector2Int operator*(int scalar) const { return {x * scalar, y * scalar}; }
   Vector2Int operator/(int scalar) const { return {x / scalar, y / scalar}; }

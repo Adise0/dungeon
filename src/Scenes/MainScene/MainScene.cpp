@@ -1,4 +1,5 @@
 #include "./MainScene.h"
+#include "../../Behaviours/PlayerController/PlayerController.h"
 #include "../../Engine/Components/Animator/Animator.h"
 #include "../../Engine/Components/Camera/Camera.h"
 #include "../../Engine/Components/Renderer/Renderer.h"
@@ -12,6 +13,7 @@ namespace Dungeon::Scenes {
 
 using namespace Engine;
 using namespace Rendering;
+using namespace Behaviours;
 
 void MainScene::LoadHierarchy() {
   GameObject *camHolder = root->CreateChild("Main Camera");
@@ -33,6 +35,9 @@ void MainScene::LoadHierarchy() {
   lilDudeRenderer->size = Vector2(1, 1);
   lilDudeRenderer->useSprite = false;
   lilDude->AddComponent(std::move(lilDudeRenderer));
+
+  auto playerController = std::make_unique<PlayerController>();
+  lilDude->AddComponent(std::move(playerController));
 
   auto lilDudeAnimatorOriginal = std::make_unique<Animator>();
   Animator *lilDudeAnimator = (Animator *)lilDude->AddComponent(std::move(lilDudeAnimatorOriginal));

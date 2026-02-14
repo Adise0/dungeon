@@ -7,6 +7,9 @@
 
 namespace Dungeon::Engine {
 
+Store<Scene> Scene::store;
+Scene *Scene::activeScene;
+
 Scene::Scene() { store.RegisterItem(this); }
 
 void Scene::SetAsActiveScene() {

@@ -1,5 +1,5 @@
 #include "./InputSystem.h"
-
+#include <iostream>
 
 namespace Dungeon::Engine {
 
@@ -12,7 +12,7 @@ Input &InputSystem::GetKey(std::string keyName) {
 }
 
 void InputSystem::Frame() {
-  for (auto &[_, input] : inputs) {
+  for (auto &[name, input] : inputs) {
     input.Frame();
   }
 }

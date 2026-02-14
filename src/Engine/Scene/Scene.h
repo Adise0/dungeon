@@ -10,8 +10,8 @@ class GameObject;
 class Scene {
   // #region Static
 public:
-  Store<Scene> store;
-  Scene *activeScene;
+  static Store<Scene> store;
+  static Scene *activeScene;
   // #endregion
 
   // #region Constrcutor
