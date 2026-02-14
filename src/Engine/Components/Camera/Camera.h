@@ -31,7 +31,7 @@ public:
   // #region Methods
 public:
   void SetAsActiveCamera();
-  void Render();
+  void Render(float deltaTime);
   void SetSize(float newSize);
 
 private:

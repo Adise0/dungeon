@@ -51,12 +51,12 @@ void GameManager::Update(float deltaTime) {
   // #endregion
 }
 
-void GameManager::Render() {
+void GameManager::Render(float deltaTime) {
   // #region Render
 
   try {
     Camera *activeCam = Camera::activeCamera;
-    if (activeCam != nullptr) activeCam->Render();
+    if (activeCam != nullptr) activeCam->Render(deltaTime);
     else SDL_RenderClear(WindowManager::renderer);
 
 
@@ -91,7 +91,7 @@ void GameManager::Run() {
 
 
     Update(deltaTime);
-    Render();
+    Render(deltaTime);
   }
   // #endregion
 }

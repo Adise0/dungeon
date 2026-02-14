@@ -31,7 +31,7 @@ private:
   static void Update(float deltaTime);
 
   /// @brief Renders the presented screens
-  static void Render();
+  static void Render(float deltaTime);
 
   /// @brief Loads screens
   static void LoadScreens();

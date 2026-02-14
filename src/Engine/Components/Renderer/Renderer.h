@@ -22,6 +22,7 @@ public:
   SDL_Texture *sprite;
   SDL_Color color{248, 24, 148, 255};
   bool useSprite = true;
+  bool useAnimator = false;
   // #endregion
 
   // #region Constructor
@@ -32,7 +33,7 @@ public:
   // #region Methods
 public:
   /// @brief Renders this renderer contents to the screen
-  void Render(SDL_FRect rect);
+  void Render(float deltaTime, SDL_FRect rect);
   // #endregion
 };
 } // namespace Dungeon::Engine

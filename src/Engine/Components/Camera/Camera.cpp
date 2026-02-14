@@ -11,8 +11,7 @@ using namespace Rendering;
 Camera::Camera() {
   // #region Camera
   int index = store.RegisterItem(this);
-  name = index == 0 ? "Main Camera" : "Camera " + index;
-
+  name = "Camera " + index;
   ComputeRect();
   // #endregion
 };
@@ -28,7 +27,7 @@ void Camera::SetAsActiveCamera() {
   // #endregion
 }
 
-void Camera::Render() {
+void Camera::Render(float deltaTime) {
   SDL_SetRenderDrawColor(WindowManager::renderer, background.r, background.g, background.b,
                          background.a);
   SDL_RenderClear(WindowManager::renderer);
@@ -65,7 +64,7 @@ void Camera::Render() {
 
     SDL_FRect rect = {screenPosition.x - (rendererSize.x * 0.5f),
                       screenPosition.y - (rendererSize.y * 0.5f), rendererSize.x, rendererSize.y};
-    renderer->Render(rect);
+    renderer->Render(deltaTime, rect);
   }
 }
 

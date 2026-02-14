@@ -5,8 +5,7 @@ namespace Dungeon::Engine {
 
 GameObject::GameObject(Scene *scene, std::string name) : name(name) {
   store.RegisterItem(this);
-  std::unique_ptr<Transform> original = std::make_unique<Transform>(this);
-  transform = original.get();
+  transform = new Transform(this);
   this->scene = scene;
 }
 GameObject::GameObject(Scene *scene, Transform *parent, std::string name) : name(name) {
