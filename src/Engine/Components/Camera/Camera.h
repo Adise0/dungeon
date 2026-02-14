@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../../Component/Component.h"
 #include "../../Objects/Store/Store.h"
 #include <SDL3/SDL.h>

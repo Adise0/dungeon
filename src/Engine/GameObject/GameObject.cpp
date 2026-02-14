@@ -21,10 +21,10 @@ void GameObject::AddComponent(std::unique_ptr<Component> component) {
 Component *GameObject::GetComponentByName(std::string name) {
 
   auto it = std::find_if(components.begin(), components.end(),
-                         [name](Component *c) { return c->name == name; });
+                         [name](const std::unique_ptr<Component> &c) { return c->name == name; });
 
   if (it == components.end()) return nullptr;
-  return (*it).get();
+  return it->get();
 }
 
 } // namespace Dungeon::Engine

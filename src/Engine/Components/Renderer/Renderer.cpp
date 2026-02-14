@@ -10,8 +10,11 @@ Renderer::Renderer() { store.RegisterItem(this); }
 
 void Renderer::Render(SDL_FRect rect) {
   // #region Render
-  SDL_RenderTexture(WindowManager::renderer, sprite, NULL, &rect);
-
+  if (useSprite) SDL_RenderTexture(WindowManager::renderer, sprite, NULL, &rect);
+  else {
+    SDL_SetRenderDrawColor(WindowManager::renderer, color.r, color.g, color.b, color.a);
+    SDL_RenderFillRect(WindowManager::renderer, &rect);
+  }
   // #endregion
 }
 } // namespace Dungeon::Engine

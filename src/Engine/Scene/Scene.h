@@ -1,8 +1,12 @@
-#include "../GameObject/GameObject.h"
+#pragma once
+
 #include "../Objects/Store/Store.h"
+#include <memory>
 #include <string>
 
+
 namespace Dungeon::Engine {
+class GameObject;
 class Scene {
   // #region Static
 public:

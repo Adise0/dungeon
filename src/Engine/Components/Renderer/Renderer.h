@@ -20,6 +20,8 @@ public:
   float zIndex = 0;
   Vector2 size;
   SDL_Texture *sprite;
+  SDL_Color color{248, 24, 148, 255};
+  bool useSprite = true;
   // #endregion
 
   // #region Constructor

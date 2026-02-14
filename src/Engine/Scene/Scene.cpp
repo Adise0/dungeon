@@ -1,5 +1,8 @@
 #include "./Scene.h"
+#include "../../Engine/Components/Camera/Camera.h"
+#include "../../Engine/GameObject/GameObject.h"
 #include <algorithm>
+#include <iostream>
 
 namespace Dungeon::Engine {
 
@@ -14,6 +17,10 @@ void Scene::SetAsActiveScene() {
   if (it != scenes.end()) (*it)->isActive = false;
 
   activeScene = this;
+
+  Camera *cam = (Camera *)(FindGameObjectByName("Main Camera")->GetComponentByName("Main Camera"));
+  cam->SetAsActiveCamera();
+  std::cout << "Activated Main Camera" << std::endl;
   // #endregion
 }
 

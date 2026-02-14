@@ -56,7 +56,9 @@ void GameManager::Render() {
 
   try {
     Camera *activeCam = Camera::activeCamera;
-    activeCam->Render();
+    if (activeCam != nullptr) activeCam->Render();
+    else SDL_RenderClear(WindowManager::renderer);
+
 
     SDL_RenderPresent(WindowManager::renderer);
   } catch (...) {
