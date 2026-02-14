@@ -1,4 +1,5 @@
 #include "./Scene.h"
+#include "../../Engine/Components/Behaviour/Behaviour.h"
 #include "../../Engine/Components/Camera/Camera.h"
 #include "../../Engine/GameObject/GameObject.h"
 #include <algorithm>
@@ -21,6 +22,29 @@ void Scene::SetAsActiveScene() {
   Camera *cam = (Camera *)(FindGameObjectByName("Main Camera")->GetComponentByName("Main Camera"));
   cam->SetAsActiveCamera();
   std::cout << "Activated Main Camera" << std::endl;
+
+  std::vector<GameObject *> sceneObjects = GameObject::store.GetItems();
+  sceneObjects.erase(std::remove_if(sceneObjects.begin(), sceneObjects.end(),
+                                    [&](GameObject *go) { return go->scene != this; }));
+
+  for (GameObject *sceneObject : sceneObjects) {
+    for (size_t i = 0; i < sceneObject->components.size(); i++) {
+      if (auto *behaviour = dynamic_cast<Behaviour *>(sceneObject->components[i].get())) {
+        behaviour->Awake();
+      }
+    }
+  }
+
+
+  for (GameObject *sceneObject : sceneObjects) {
+    if (!sceneObject->IsEnabled()) continue;
+    for (size_t i = 0; i < sceneObject->components.size(); i++) {
+      if (auto *behaviour = dynamic_cast<Behaviour *>(sceneObject->components[i].get())) {
+        behaviour->Start();
+      }
+    }
+  }
+
   // #endregion
 }
 

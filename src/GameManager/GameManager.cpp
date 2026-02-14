@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "../Engine/Components/Behaviour/Behaviour.h"
 #include "../Engine/Components/Camera/Camera.h"
+#include "../Engine/InputSystem/InputSystem.h"
 #include "../WindowManager/WindowManager.h"
 #include <SDL3/SDL.h>
 #include <algorithm>
@@ -17,11 +18,33 @@ bool GameManager::isRunning = false;
 
 void GameManager::ProcessInput(SDL_Event &event) {
   // #region ProcessInput
+  InputSystem::Frame();
+
   while (SDL_PollEvent(&event)) {
 
     switch (event.type) {
     case SDL_EVENT_QUIT:
       isRunning = false;
+      break;
+
+    case SDL_EVENT_MOUSE_MOTION:
+      InputSystem::mousePos = Vector2(event.motion.x, event.motion.y);
+      break;
+
+    case SDL_EVENT_KEY_DOWN:
+      InputSystem::GetKey(SDL_GetKeyName(event.key.key)).Press();
+      break;
+
+    case SDL_EVENT_KEY_UP:
+      InputSystem::GetKey(SDL_GetKeyName(event.key.key)).Release();
+      break;
+
+    case SDL_EVENT_MOUSE_BUTTON_DOWN:
+      InputSystem::GetKey(GetMouseButtonName(event.button.button)).Press();
+      break;
+
+    case SDL_EVENT_MOUSE_BUTTON_UP:
+      InputSystem::GetKey(GetMouseButtonName(event.button.button)).Release();
       break;
 
     default:
@@ -102,5 +125,22 @@ void GameManager::StartGame() {
   // #endregion
 }
 
+
+std::string GetMouseButtonName(uint8_t button) {
+  switch (button) {
+  case SDL_BUTTON_LEFT:
+    return "MouseLeft";
+  case SDL_BUTTON_RIGHT:
+    return "MouseRight";
+  case SDL_BUTTON_MIDDLE:
+    return "MouseMiddle";
+  case SDL_BUTTON_X1:
+    return "MouseX1";
+  case SDL_BUTTON_X2:
+    return "MouseX2";
+  default:
+    return "MouseUnknown";
+  }
+}
 
 } // namespace Dungeon

@@ -29,18 +29,34 @@ void MainScene::LoadHierarchy() {
   backgroundHolder->AddComponent(std::move(bgRenderer));
 
   GameObject *lilDude = root->CreateChild("Lil Dude");
-  auto r = std::make_unique<Renderer>();
-  r->size = Vector2(1, 1);
-  r->useSprite = false;
-  lilDude->AddComponent(std::move(r));
+  auto lilDudeRenderer = std::make_unique<Renderer>();
+  lilDudeRenderer->size = Vector2(1, 1);
+  lilDudeRenderer->useSprite = false;
+  lilDude->AddComponent(std::move(lilDudeRenderer));
 
-  auto a = std::make_unique<Animator>();
-  Animator *anim = (Animator *)lilDude->AddComponent(std::move(a));
-  SDL_Texture *spriteSheet = IMG_LoadTexture(WindowManager::renderer, "assets/sprites/Idle.png");
+  auto lilDudeAnimatorOriginal = std::make_unique<Animator>();
+  Animator *lilDudeAnimator = (Animator *)lilDude->AddComponent(std::move(lilDudeAnimatorOriginal));
+
+  SDL_Texture *spriteSheet = WindowManager::LoadSprite("assets/sprites/lilDude/unarmed/Idle.png");
   SDL_SetTextureScaleMode(spriteSheet, SDL_SCALEMODE_NEAREST);
-  AnimationClip clip(24, spriteSheet);
-  clip.frameRate = 2;
-  anim->AddAnimation("Idle", clip);
-  anim->PlayAnimation("Idle");
+
+  AnimationClip idleFront(64, spriteSheet);
+  idleFront.frameRate = 4;
+  lilDudeAnimator->AddAnimation("IdleFront", idleFront);
+
+  AnimationClip idleLeft(64, spriteSheet);
+  idleFront.frameRate = 4;
+  idleFront.yCoord = 64;
+  lilDudeAnimator->AddAnimation("idleLeft", idleFront);
+
+  AnimationClip idleRight(64, spriteSheet);
+  idleFront.frameRate = 4;
+  idleRight.yCoord = 128;
+  lilDudeAnimator->AddAnimation("idleRight", idleFront);
+
+  AnimationClip idleBack(64, spriteSheet);
+  idleFront.frameRate = 4;
+  idleRight.yCoord = 192;
+  lilDudeAnimator->AddAnimation("idleBack", idleFront);
 }
 } // namespace Dungeon::Scenes
