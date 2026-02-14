@@ -15,6 +15,22 @@ using namespace Engine;
 
 bool GameManager::isRunning = false;
 
+std::string GetMouseButtonName(uint8_t button) {
+  switch (button) {
+  case SDL_BUTTON_LEFT:
+    return "MouseLeft";
+  case SDL_BUTTON_RIGHT:
+    return "MouseRight";
+  case SDL_BUTTON_MIDDLE:
+    return "MouseMiddle";
+  case SDL_BUTTON_X1:
+    return "MouseX1";
+  case SDL_BUTTON_X2:
+    return "MouseX2";
+  default:
+    return "MouseUnknown";
+  }
+}
 
 void GameManager::ProcessInput(SDL_Event &event) {
   // #region ProcessInput
@@ -126,21 +142,5 @@ void GameManager::StartGame() {
 }
 
 
-std::string GetMouseButtonName(uint8_t button) {
-  switch (button) {
-  case SDL_BUTTON_LEFT:
-    return "MouseLeft";
-  case SDL_BUTTON_RIGHT:
-    return "MouseRight";
-  case SDL_BUTTON_MIDDLE:
-    return "MouseMiddle";
-  case SDL_BUTTON_X1:
-    return "MouseX1";
-  case SDL_BUTTON_X2:
-    return "MouseX2";
-  default:
-    return "MouseUnknown";
-  }
-}
 
 } // namespace Dungeon

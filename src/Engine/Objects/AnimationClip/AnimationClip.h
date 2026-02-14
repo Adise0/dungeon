@@ -13,6 +13,7 @@ public:
   float speed = 1;
   bool loop = true;
   float yCoord = 0;
+  short nOfFrames = 0;
 
 
 public:

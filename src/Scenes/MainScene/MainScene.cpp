@@ -41,22 +41,25 @@ void MainScene::LoadHierarchy() {
   SDL_SetTextureScaleMode(spriteSheet, SDL_SCALEMODE_NEAREST);
 
   AnimationClip idleFront(64, spriteSheet);
-  idleFront.frameRate = 4;
-  lilDudeAnimator->AddAnimation("IdleFront", idleFront);
+  idleFront.frameRate = 1;
+  idleFront.nOfFrames = 4;
+  lilDudeAnimator->AddAnimation("Idle Front", idleFront);
 
   AnimationClip idleLeft(64, spriteSheet);
   idleFront.frameRate = 4;
   idleFront.yCoord = 64;
-  lilDudeAnimator->AddAnimation("idleLeft", idleFront);
+  lilDudeAnimator->AddAnimation("Idle Left", idleFront);
 
   AnimationClip idleRight(64, spriteSheet);
   idleFront.frameRate = 4;
   idleRight.yCoord = 128;
-  lilDudeAnimator->AddAnimation("idleRight", idleFront);
+  lilDudeAnimator->AddAnimation("Idle Right", idleFront);
 
   AnimationClip idleBack(64, spriteSheet);
   idleFront.frameRate = 4;
   idleRight.yCoord = 192;
-  lilDudeAnimator->AddAnimation("idleBack", idleFront);
+  lilDudeAnimator->AddAnimation("Idle Back", idleFront);
+
+  lilDudeAnimator->PlayAnimation("Idle Front");
 }
 } // namespace Dungeon::Scenes
