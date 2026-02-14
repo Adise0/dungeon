@@ -1,6 +1,7 @@
 #pragma once
 #include "../Component/Component.h"
 #include "../Objects/Store/Store.h"
+#include "../Scene/Scene.h"
 #include "../Transform/Transform.h"
 #include <memory>
 #include <string>
@@ -19,7 +20,9 @@ public:
   std::string name;
   Transform *transform;
   std::vector<std::unique_ptr<Component>> components;
-  GameObject(std::string name);
+  Scene *scene;
+
+  GameObject(Scene *scene, std::string name);
   ~GameObject();
 
 private:
@@ -33,5 +36,7 @@ public:
   bool IsEnabled() { return isEnabled; };
 
   void AddComponent(std::unique_ptr<Component> component);
+
+  Component *GetComponentByName(std::string name);
 };
 } // namespace Dungeon::Engine
