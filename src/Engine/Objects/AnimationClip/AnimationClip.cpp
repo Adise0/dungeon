@@ -12,7 +12,7 @@ short AnimationClip::Length() { return spriteSheet->w / cellSize; }
 SDL_FRect AnimationClip::GetCurrentFrameRect() {
   // #region GetCurrentFrame
 
-  return {cellSize * frame, 0, (float)spriteSheet->h, cellSize};
+  return {cellSize * frame, yCoord, (float)spriteSheet->h, cellSize};
   // #endregion
 }
 

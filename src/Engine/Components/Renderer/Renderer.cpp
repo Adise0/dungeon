@@ -19,12 +19,18 @@ void Renderer::Render(float deltaTime, SDL_FRect rect) {
     Animator *animator = (Animator *)(gameObject->GetComponentByName("Animator"));
     animator->Render(deltaTime, rect);
   } else {
-    if (useSprite) SDL_RenderTexture(WindowManager::renderer, sprite, NULL, &rect);
+    if (useSprite)
+      SDL_RenderTexture(WindowManager::renderer, sprite, overrideSRect ? &srect : NULL, &rect);
     else {
       SDL_SetRenderDrawColor(WindowManager::renderer, color.r, color.g, color.b, color.a);
       SDL_RenderFillRect(WindowManager::renderer, &rect);
     }
   }
   // #endregion
+}
+
+void Renderer::SetSRect(SDL_FRect srect) {
+  this->srect = srect;
+  overrideSRect = true;
 }
 } // namespace Dungeon::Engine

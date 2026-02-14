@@ -12,6 +12,7 @@ public:
   float currentTimer = 0;
   float speed = 1;
   bool loop = true;
+  float yCoord = 0;
 
 
 public:

@@ -20,9 +20,13 @@ public:
   float zIndex = 0;
   Vector2 size;
   SDL_Texture *sprite;
+  SDL_FRect srect{0, 0, size.x, size.y};
   SDL_Color color{248, 24, 148, 255};
   bool useSprite = true;
   bool useAnimator = false;
+
+private:
+  bool overrideSRect = false;
   // #endregion
 
   // #region Constructor
@@ -34,6 +38,7 @@ public:
 public:
   /// @brief Renders this renderer contents to the screen
   void Render(float deltaTime, SDL_FRect rect);
+  void SetSRect(SDL_FRect srect);
   // #endregion
 };
 } // namespace Dungeon::Engine
