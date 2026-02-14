@@ -9,10 +9,7 @@ Animator::Animator() { name = "Animator"; }
 
 void Animator::AddAnimation(std::string clipName, AnimationClip clip) {
   clips.try_emplace(clipName, clip);
-  std::cout << "GO is: " << gameObject->name << std::endl;
   Renderer *renderer = (Renderer *)gameObject->GetComponentByName("Renderer");
-  std::cout << "Rend is: " << renderer << std::endl;
-
   renderer->useAnimator = true;
   if (currentClip == "none") currentClip = clipName;
 }

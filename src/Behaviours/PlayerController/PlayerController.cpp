@@ -21,8 +21,8 @@ void PlayerController::Update(float deltaTime) {
   if (InputSystem::GetKey("S").isPressed) dir += Vector2(0, -1);
   if (InputSystem::GetKey("D").isPressed) dir += Vector2(1, 0);
 
-  if (InputSystem::GetKey("Q").isPressed) cam->size -= deltaTime;
-  if (InputSystem::GetKey("E").isPressed) cam->size += deltaTime;
+  if (InputSystem::GetKey("Q").isPressed) cam->SetSize(cam->size -= 4 * deltaTime);
+  if (InputSystem::GetKey("E").isPressed) cam->SetSize(cam->size += 4 * deltaTime);
 
   gameObject->transform->position += dir.Normalized() * speed * deltaTime;
 }

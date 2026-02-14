@@ -24,14 +24,16 @@ void Scene::SetAsActiveScene() {
 
   Camera *cam = (Camera *)(FindGameObjectByName("Main Camera")->GetComponentByName("Main Camera"));
   cam->SetAsActiveCamera();
-  std::cout << "Activated Main Camera" << std::endl;
 
   std::vector<GameObject *> sceneObjects = GameObject::store.GetItems();
   sceneObjects.erase(std::remove_if(sceneObjects.begin(), sceneObjects.end(),
-                                    [&](GameObject *go) { return go->scene != this; }));
+                                    [&](GameObject *go) { return go->scene != this; }),
+                     sceneObjects.end());
+
 
   for (GameObject *sceneObject : sceneObjects) {
     for (size_t i = 0; i < sceneObject->components.size(); i++) {
+
       if (auto *behaviour = dynamic_cast<Behaviour *>(sceneObject->components[i].get())) {
         behaviour->Awake();
       }

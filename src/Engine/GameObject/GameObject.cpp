@@ -23,7 +23,6 @@ GameObject::~GameObject() {}
 Component *GameObject::AddComponent(std::unique_ptr<Component> component) {
   // #region Component
   component->gameObject = this;
-  std::cout << "Adding component: " << component.get()->name << " To: " << name << std::endl;
   component->transform = transform;
   Component *raw = component.get();
   components.push_back(std::move(component));

@@ -19,6 +19,7 @@ public:
 
   // #region Constructor
 public:
+  virtual ~Component() = default;
   // #endregion
 
   // #region Methods
