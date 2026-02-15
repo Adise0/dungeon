@@ -4,9 +4,14 @@
 namespace Dungeon::Engine {
 
 
-Collider::Collider() {
+Collider::Collider(float width, float height) : width(width), height(height) {
   name = "Collider";
   Scene::activeScene->AppendCollider(this);
 }
-SDL_FRect Collider::GetBounds() { throw std::runtime_error("Get bounds must be implemented"); }
+SDL_FRect Collider::GetBounds() {
+  // #region GetBounds
+  Vector2 origin(width / 2, height / 2);
+  return {origin.x, origin.y, width, height};
+  // #endregion
+}
 } // namespace Dungeon::Engine

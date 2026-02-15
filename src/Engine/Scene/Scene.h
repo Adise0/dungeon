@@ -16,7 +16,7 @@ public:
   static Store<Scene> store;
   static Scene *activeScene;
   static std::unordered_map<int64_t, std::vector<Collider *>> sceneColliders;
-  static const float colliderCellSize = 3;
+  static constexpr float ColliderCellSize = 3;
   // #endregion
 
   // #region Constrcutor

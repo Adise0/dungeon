@@ -4,6 +4,8 @@
 #include <SDL3/SDL.h>
 namespace Dungeon::Engine {
 
+KinematicBody::KinematicBody() { name = "KBody"; }
+
 static inline bool PointInRange(float v, float a, float b) { return v >= a && v <= b; }
 
 float KinematicBody::GetTOI(Vector2 delta) {
@@ -24,10 +26,10 @@ float KinematicBody::GetTOI(Vector2 delta) {
   Vector2 sweepBoxMax(std::max(startMax.x, endMax.x), std::max(startMax.y, endMax.y));
 
 
-  Vector2Int minCell(std::floor(sweepBoxMin.x / Scene::colliderCellSize),
-                     std::floor(sweepBoxMin.y / Scene::colliderCellSize));
-  Vector2Int maxCell(std::floor(sweepBoxMax.x / Scene::colliderCellSize),
-                     std::floor(sweepBoxMax.y / Scene::colliderCellSize));
+  Vector2Int minCell(std::floor(sweepBoxMin.x / Scene::ColliderCellSize),
+                     std::floor(sweepBoxMin.y / Scene::ColliderCellSize));
+  Vector2Int maxCell(std::floor(sweepBoxMax.x / Scene::ColliderCellSize),
+                     std::floor(sweepBoxMax.y / Scene::ColliderCellSize));
 
   Vector2 myHalf(myBox.w * 0.5f, myBox.h * 0.5f);
   Vector2 myCenter = startMin + myHalf;

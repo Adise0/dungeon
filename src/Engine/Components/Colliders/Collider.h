@@ -5,11 +5,13 @@
 namespace Dungeon::Engine {
 
 class Collider : public Component {
-public:
-  bool isStatic;
 
 public:
-  Collider();
+  float width;
+  float height;
+
+public:
+  Collider(float width, float height);
 
 public:
   virtual SDL_FRect GetBounds();

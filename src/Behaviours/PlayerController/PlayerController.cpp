@@ -10,6 +10,8 @@ using namespace Engine;
 void PlayerController::Awake() {
   cam = (Camera *)Scene::activeScene->FindGameObjectByName("Main Camera")
             ->GetComponentByName("Main Camera");
+
+  kBody = (KinematicBody *)gameObject->GetComponentByName("KBody");
 }
 
 void PlayerController::Update(float deltaTime) {
@@ -24,6 +26,12 @@ void PlayerController::Update(float deltaTime) {
   if (InputSystem::GetKey("Q").isPressed) cam->SetSize(cam->size -= 4 * deltaTime);
   if (InputSystem::GetKey("E").isPressed) cam->SetSize(cam->size += 4 * deltaTime);
 
-  gameObject->transform->position += dir.Normalized() * speed * deltaTime;
+  Vector2 delta = dir.Normalized() * speed * deltaTime;
+  float TOI = kBody->GetTOI(delta);
+  Vector2 dest = delta * TOI;
+  transform->position = dest;
+  std::cout << "Delta: " + delta.ToString() + " TOI: " + std::to_string(TOI) +
+                   " Dest: " + dest.ToString()
+            << std::endl;
 }
 } // namespace Dungeon::Behaviours

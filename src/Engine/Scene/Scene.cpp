@@ -10,6 +10,7 @@ namespace Dungeon::Engine {
 
 Store<Scene> Scene::store;
 Scene *Scene::activeScene;
+std::unordered_map<int64_t, std::vector<Collider *>> Scene::sceneColliders;
 
 Scene::Scene() { store.RegisterItem(this); }
 
@@ -69,11 +70,11 @@ void Scene::AppendCollider(Collider *collider) {
   // #region AppendCollider
   SDL_FRect rect = collider->GetBounds();
 
-  int gridMinX = std::floor(rect.x / colliderCellSize);
-  int gridMinY = std::floor(rect.y / colliderCellSize);
+  int gridMinX = std::floor(rect.x / ColliderCellSize);
+  int gridMinY = std::floor(rect.y / ColliderCellSize);
 
-  int gridMaxX = std::floor((rect.x + rect.w) / colliderCellSize);
-  int gridMaxY = std::floor((rect.y + rect.h) / colliderCellSize);
+  int gridMaxX = std::floor((rect.x + rect.w) / ColliderCellSize);
+  int gridMaxY = std::floor((rect.y + rect.h) / ColliderCellSize);
 
   for (size_t x = gridMinX; x <= gridMaxX; x++) {
     for (size_t y = gridMinY; y <= gridMaxY; y++) {
