@@ -2,6 +2,7 @@
 #include "../../Engine/Components/Behaviour/Behaviour.h"
 #include "../../Engine/Components/Camera/Camera.h"
 #include "../../Engine/GameObject/GameObject.h"
+#include <SDL3/SDL.h>
 #include <algorithm>
 #include <iostream>
 
@@ -63,4 +64,24 @@ GameObject *Scene::FindGameObjectByName(std::string name) {
   return *it;
   // #endregion
 }
+
+void Scene::AppendCollider(Collider *collider) {
+  // #region AppendCollider
+  SDL_FRect rect = collider->GetBounds();
+
+  int gridMinX = std::floor(rect.x / colliderCellSize);
+  int gridMinY = std::floor(rect.y / colliderCellSize);
+
+  int gridMaxX = std::floor((rect.x + rect.w) / colliderCellSize);
+  int gridMaxY = std::floor((rect.y + rect.h) / colliderCellSize);
+
+  for (size_t x = gridMinX; x <= gridMaxX; x++) {
+    for (size_t y = gridMinY; y <= gridMaxY; y++) {
+      int64_t packed = ((int64_t)x << 32) | (uint32_t)y;
+      sceneColliders[packed].push_back(collider);
+    }
+  }
+  // #endregion
+}
+
 } // namespace Dungeon::Engine

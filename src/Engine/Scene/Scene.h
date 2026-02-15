@@ -1,8 +1,11 @@
 #pragma once
 
+#include "../Components/Colliders/Collider.h"
 #include "../Objects/Store/Store.h"
+#include "../Objects/Vector2/Vector2.h"
 #include <memory>
 #include <string>
+#include <unordered_map>
 
 
 namespace Dungeon::Engine {
@@ -12,6 +15,8 @@ class Scene {
 public:
   static Store<Scene> store;
   static Scene *activeScene;
+  static std::unordered_map<int64_t, std::vector<Collider *>> sceneColliders;
+  static const float colliderCellSize = 3;
   // #endregion
 
   // #region Constrcutor
@@ -29,6 +34,8 @@ public:
   void SetAsActiveScene();
 
   GameObject *FindGameObjectByName(std::string name);
+
+  void AppendCollider(Collider *collider);
   // #endregion
 };
 } // namespace Dungeon::Engine
