@@ -6,6 +6,7 @@ namespace Dungeon::Engine {
 
 struct Vector2Int;
 struct Vector2 {
+
   float x;
   float y;
 
@@ -21,6 +22,7 @@ struct Vector2 {
   Vector2(const Vector2Int &v); // declared only
   Vector2Int ToInt() const;     // declared only
 
+  bool operator==(const Vector2 &other) { return (x == other.x && y == other.y); }
   Vector2 operator+(const Vector2 &other) const { return {x + other.x, y + other.y}; }
   Vector2 &operator+=(const Vector2 &other) {
     x += other.x;

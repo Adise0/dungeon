@@ -33,7 +33,7 @@ void MainScene::LoadHierarchy() {
   backgroundHolder->AddComponent(std::move(bgRenderer));
 
   GameObject *obstacle = root->CreateChild("Obstacle");
-  obstacle->transform->position = Vector2(0, 1);
+  obstacle->transform->position = Vector2(0, 1.1);
   auto obstacleRenderer = std::make_unique<Renderer>();
   obstacleRenderer->useSprite = false;
   obstacleRenderer->color = {0, 0, 255, 255};
@@ -58,32 +58,32 @@ void MainScene::LoadHierarchy() {
   auto playerController = std::make_unique<PlayerController>();
   lilDude->AddComponent(std::move(playerController));
 
-  auto lilDudeAnimatorOriginal = std::make_unique<Animator>();
-  Animator *lilDudeAnimator = (Animator *)lilDude->AddComponent(std::move(lilDudeAnimatorOriginal));
+  // auto lilDudeAnimatorOriginal = std::make_unique<Animator>();
+  // Animator *lilDudeAnimator = (Animator *)lilDude->AddComponent(std::move(lilDudeAnimatorOriginal));
 
-  SDL_Texture *spriteSheet = WindowManager::LoadSprite("assets/sprites/lilDude/unarmed/Idle.png");
-  SDL_SetTextureScaleMode(spriteSheet, SDL_SCALEMODE_NEAREST);
+  // SDL_Texture *spriteSheet = WindowManager::LoadSprite("assets/sprites/lilDude/unarmed/Idle.png");
+  // SDL_SetTextureScaleMode(spriteSheet, SDL_SCALEMODE_NEAREST);
 
-  AnimationClip idleFront(64, spriteSheet);
-  idleFront.frameRate = 1;
-  idleFront.nOfFrames = 4;
-  lilDudeAnimator->AddAnimation("Idle Front", idleFront);
+  // AnimationClip idleFront(64, spriteSheet);
+  // idleFront.frameRate = 1;
+  // idleFront.nOfFrames = 4;
+  // lilDudeAnimator->AddAnimation("Idle Front", idleFront);
 
-  AnimationClip idleLeft(64, spriteSheet);
-  idleFront.frameRate = 4;
-  idleFront.yCoord = 64;
-  lilDudeAnimator->AddAnimation("Idle Left", idleFront);
+  // AnimationClip idleLeft(64, spriteSheet);
+  // idleFront.frameRate = 4;
+  // idleFront.yCoord = 64;
+  // lilDudeAnimator->AddAnimation("Idle Left", idleFront);
 
-  AnimationClip idleRight(64, spriteSheet);
-  idleFront.frameRate = 4;
-  idleRight.yCoord = 128;
-  lilDudeAnimator->AddAnimation("Idle Right", idleFront);
+  // AnimationClip idleRight(64, spriteSheet);
+  // idleFront.frameRate = 4;
+  // idleRight.yCoord = 128;
+  // lilDudeAnimator->AddAnimation("Idle Right", idleFront);
 
-  AnimationClip idleBack(64, spriteSheet);
-  idleFront.frameRate = 4;
-  idleRight.yCoord = 192;
-  lilDudeAnimator->AddAnimation("Idle Back", idleFront);
+  // AnimationClip idleBack(64, spriteSheet);
+  // idleFront.frameRate = 4;
+  // idleRight.yCoord = 192;
+  // lilDudeAnimator->AddAnimation("Idle Back", idleFront);
 
-  lilDudeAnimator->PlayAnimation("Idle Front");
+  // lilDudeAnimator->PlayAnimation("Idle Front");
 }
 } // namespace Dungeon::Scenes

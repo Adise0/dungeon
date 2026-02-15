@@ -26,12 +26,9 @@ void PlayerController::Update(float deltaTime) {
   if (InputSystem::GetKey("Q").isPressed) cam->SetSize(cam->size -= 4 * deltaTime);
   if (InputSystem::GetKey("E").isPressed) cam->SetSize(cam->size += 4 * deltaTime);
 
+  if (dir == Vector2(0, 0)) return;
+
   Vector2 delta = dir.Normalized() * speed * deltaTime;
-  float TOI = kBody->GetTOI(delta);
-  Vector2 dest = delta * TOI;
-  transform->position = dest;
-  std::cout << "Delta: " + delta.ToString() + " TOI: " + std::to_string(TOI) +
-                   " Dest: " + dest.ToString()
-            << std::endl;
+  transform->position += delta * kBody->GetTOI(delta);
 }
 } // namespace Dungeon::Behaviours

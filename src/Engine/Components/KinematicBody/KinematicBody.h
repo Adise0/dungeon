@@ -5,6 +5,10 @@ namespace Dungeon::Engine {
 
 class KinematicBody : public Component {
 
+private:
+  static constexpr float kSkin = 0.1f;
+
+
 public:
   KinematicBody();
 

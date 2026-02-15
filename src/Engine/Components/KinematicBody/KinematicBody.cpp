@@ -2,25 +2,28 @@
 #include "../../GameObject/GameObject.h"
 #include "../Colliders/Collider.h"
 #include <SDL3/SDL.h>
+#include <iostream>
 namespace Dungeon::Engine {
 
 KinematicBody::KinematicBody() { name = "KBody"; }
 
-static inline bool PointInRange(float v, float a, float b) { return v >= a && v <= b; }
-
+inline bool PointInRange(float v, float a, float b) {
+  if (a > b) std::swap(a, b);
+  return v >= a && v <= b;
+}
 float KinematicBody::GetTOI(Vector2 delta) {
   // #region GetTOI
 
   Collider *myCollider = (Collider *)(gameObject->GetComponentByName("Collider"));
   SDL_FRect myBox = myCollider->GetBounds();
 
-  Vector2 startMin(transform->position.x + myBox.x, transform->position.y + myBox.y);
+  Vector2 startMin(transform->position.x - myBox.x, transform->position.y - myBox.y);
   Vector2 startMax = startMin + Vector2(myBox.w, myBox.h);
 
   Vector2 endPos = transform->position + delta;
 
-  Vector2 endMin = endPos + Vector2(myBox.x, myBox.y);
-  Vector2 endMax = endPos + endMin + Vector2(myBox.w, myBox.h);
+  Vector2 endMin = endPos - Vector2(myBox.x, myBox.y);
+  Vector2 endMax = endPos + Vector2(myBox.w, myBox.h);
 
   Vector2 sweepBoxMin(std::min(startMin.x, endMin.x), std::min(startMin.y, endMin.y));
   Vector2 sweepBoxMax(std::max(startMax.x, endMax.x), std::max(startMax.y, endMax.y));
@@ -36,19 +39,21 @@ float KinematicBody::GetTOI(Vector2 delta) {
 
   float earliestTOI = 1.0f;
 
-  for (size_t x = minCell.x; x <= maxCell.x; x++) {
-    for (size_t y = minCell.y; y <= maxCell.y; y++) {
+  for (int x = minCell.x; x <= maxCell.x; x++) {
+    for (int y = minCell.y; y <= maxCell.y; y++) {
+
       int64_t packed = ((int64_t)x << 32) | (uint32_t)y;
 
       auto it = Scene::sceneColliders.find(packed);
       if (it == Scene::sceneColliders.end()) continue;
-
-      for (Collider *collider : Scene::sceneColliders[packed]) {
+      std::cout << "Checking cell " + std::to_string(x) + " | " + std::to_string(y) << std::endl;
+      std::cout << "Found: " << it->second.size() << " colliders" << std::endl;
+      for (Collider *collider : it->second) {
         if (collider == myCollider) continue;
 
         SDL_FRect colRect = collider->GetBounds();
-        Vector2 colMin(collider->transform->position.x + colRect.x,
-                       collider->transform->position.y + colRect.y);
+        Vector2 colMin(collider->transform->position.x - colRect.x,
+                       collider->transform->position.y - colRect.y);
         Vector2 colMax = colMin + Vector2(colRect.w, colRect.h);
 
         Vector2 expColMin = colMin - myHalf;
@@ -56,6 +61,11 @@ float KinematicBody::GetTOI(Vector2 delta) {
 
         float txEntry, txExit;
         float tyEntry, tyExit;
+
+        std::cout << "My min: " + startMin.ToString() + " My max: " + startMax.ToString()
+                  << std::endl;
+        std::cout << "Other min: " + colMin.ToString() + " Other max: " + colMax.ToString()
+                  << std::endl;
 
         // X axis
         if (delta.x == 0.0f) {
@@ -89,6 +99,7 @@ float KinematicBody::GetTOI(Vector2 delta) {
         if (entryTime > 1.0f) continue;
 
         float toi = std::max(0.0f, entryTime);
+        toi = std::max(0.0f, toi - kSkin);
 
         if (toi < earliestTOI) {
           earliestTOI = toi;
