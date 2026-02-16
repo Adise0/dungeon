@@ -29,6 +29,7 @@ void PlayerController::Update(float deltaTime) {
   if (dir == Vector2(0, 0)) return;
 
   Vector2 delta = dir.Normalized() * speed * deltaTime;
-  transform->position += delta * kBody->GetTOI(delta);
+  std::cout << "Kbody is: " << kBody << std::endl;
+  kBody->Translate(delta);
 }
 } // namespace Dungeon::Behaviours

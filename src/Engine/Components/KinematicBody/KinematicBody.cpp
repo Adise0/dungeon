@@ -11,7 +11,7 @@ inline bool PointInRange(float v, float a, float b) {
   if (a > b) std::swap(a, b);
   return v >= a && v <= b;
 }
-float KinematicBody::GetTOI(Vector2 delta) {
+Vector2 KinematicBody::GetTOI(Vector2 delta) {
   // #region GetTOI
 
   Collider *myCollider = (Collider *)(gameObject->GetComponentByName("Collider"));
@@ -37,7 +37,7 @@ float KinematicBody::GetTOI(Vector2 delta) {
   Vector2 myHalf(myBox.w * 0.5f, myBox.h * 0.5f);
   Vector2 myCenter = startMin + myHalf;
 
-  float earliestTOI = 1.0f;
+  Vector2 earliestTOI;
 
   for (int x = minCell.x; x <= maxCell.x; x++) {
     for (int y = minCell.y; y <= maxCell.y; y++) {
@@ -91,15 +91,16 @@ float KinematicBody::GetTOI(Vector2 delta) {
           tyExit = std::max(ty1, ty2);
         }
 
-        float entryTime = std::max(txEntry, tyEntry);
-        float exitTime = std::min(txExit, tyExit);
+        Vector2 entryTime(txEntry, tyEntry);
+        Vector2 exitTime(txEntry, tyExit);
 
-        if (entryTime > exitTime) continue;
-        if (exitTime < 0.0f) continue;
-        if (entryTime > 1.0f) continue;
+        if (entryTime.x > exitTime.x && entryTime.y > exitTime.y) continue;
+        if (exitTime.x < 0.0f && exitTime.y < 0.0f) continue;
+        if (entryTime.x > 1.0f && exitTime.y > 1.0f) continue;
 
-        float toi = std::max(0.0f, entryTime);
-        toi = std::max(0.0f, toi - kSkin);
+        Vector2 toi(std::max(0.0f, entryTime.x), std::max(0.0f, entryTime.y));
+        toi.x = std::max(0.0f, toi.x - kSkin);
+        toi.y = std::max(0.0f, toi.y - kSkin);
 
         if (toi < earliestTOI) {
           earliestTOI = toi;
@@ -108,6 +109,12 @@ float KinematicBody::GetTOI(Vector2 delta) {
     }
   }
   return earliestTOI;
+  // #endregion
+}
+
+Vector2 KinematicBody::Translate(Vector2 delta) {
+  // #region Translate
+  transform->position += delta * GetTOI(delta);
   // #endregion
 }
 } // namespace Dungeon::Engine

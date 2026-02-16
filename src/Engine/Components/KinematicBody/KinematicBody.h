@@ -1,5 +1,6 @@
 #pragma once
 #include "../../Component/Component.h"
+#include "../../Objects/Vector2/Vector2.h"
 #include "../../Scene/Scene.h"
 namespace Dungeon::Engine {
 
@@ -13,6 +14,7 @@ public:
   KinematicBody();
 
 public:
-  float GetTOI(Vector2 delta);
+  Vector2 GetTOI(Vector2 delta);
+  Vector2 Translate(Vector2 delta);
 };
 } // namespace Dungeon::Engine
